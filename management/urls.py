@@ -1,6 +1,7 @@
 from django.urls import path,include
 from .views import *
 from . import views
+import re
 app_name = 'management'
 
 urlpatterns = [
@@ -22,6 +23,7 @@ urlpatterns = [
 #############################################################
     path("addmarks/",Addmarks.as_view(),name = "addmarks"),
     path("marks/",MarksView.as_view(),name = "marks"),
+    path('marks/<str:pk>/', views.marksubview),
     path('marks/<pk>/delete/', DeleteMarks.as_view()), 
     path('marks/<pk>/update/', UpdateMarks.as_view()),
 #############################################################

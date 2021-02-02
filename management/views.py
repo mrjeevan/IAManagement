@@ -94,6 +94,14 @@ class MarksView(ListView):
     model = IAmark
     template_name = "marks.html"
     
+    var1 = Subject.objects.all()
+    var2 = IAmark.objects.all()
+    def get(self, request, *args, **kwargs):
+        context = {
+        'var1' : self.var1,
+        'var2' : self.var2
+        }
+        return render(request,self.template_name, context)
 
 class DeleteMarks(DeleteView):
     model = IAmark
@@ -194,3 +202,12 @@ def Upgrade(request):
                         ERROR +=1
                         pass
     return HttpResponse(f'Automated update Success [{ERROR}]')
+
+
+def marksubview(request,pk):
+   
+    context = {
+        'var2' : IAmark.objects.filter(sub_code = pk),
+        
+    }
+    return render(request,'marks.html',context)
