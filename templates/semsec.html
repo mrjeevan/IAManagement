@@ -15,7 +15,7 @@
     {% for object in object_list %}
     <tr class="text-center">
       <td>{{ object.sem }}</td>
-      <td>{{ object.usn }}</td>
+      <td>{{ object.get_usn_values }}</td>
       <td>
       <a href="{{ object.id }}/update" class="btn btn-info btn-xs"> Edit </a>
       <a href="{{ object.id }}/delete" class="btn btn-danger btn-xs"> Delete </a>

@@ -72,6 +72,7 @@ class SubjectView(ListView):
     model = Subject
     template_name = "subject.html"
 
+
 class DeleteSubject(DeleteView):
     model = Subject
     success_url = reverse_lazy('management:subject')
@@ -92,6 +93,7 @@ class Addmarks(CreateView):
 class MarksView(ListView):
     model = IAmark
     template_name = "marks.html"
+    
 
 class DeleteMarks(DeleteView):
     model = IAmark

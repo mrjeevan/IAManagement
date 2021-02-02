@@ -34,6 +34,19 @@ class SemSec(models.Model):
     # section = models.CharField(max_length=50,null =False)
     usn = models.ManyToManyField(Student, verbose_name='Students')
 
+    def get_usn_values(self):
+
+        ret = ''
+
+        print(self.usn.all())
+
+        # use models.ManyToMany field's all() method to return all the Department objects that this employee belongs to.
+        for usn in self.usn.all():
+            ret = ret + usn.usn + ','
+
+        # remove the last ',' and return the value.
+        return ret[:-1]
+
     def __str__(self):
         return f'[{self.sem}]'
 
