@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+  <form class="mt-4 mx-auto" style="width:600px" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button  type="submit" class="btn btn-primary mt-4">login</button>
+  </form>
+  </div>
+	
+{% endblock content %}
+
+
+
+
+
+
+
+

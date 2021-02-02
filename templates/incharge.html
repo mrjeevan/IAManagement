@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<title>All Incharges</title>
+<div class="container">
+
+<table class="table table-hover table-responsive-sm ">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">cr1</th>
+      <th scope="col">cr2</th>
+      <th scope="col">class_cordinator</th>
+      <th scope="col">sem_cordinator</th>
+      <th scope="col">classroom</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for object in object_list %}
+  <tr>
+      <td>{{ object.cr1 }}</td>
+      <td>{{ object.cr2 }}</td>
+      <td>{{ object.class_cordinator }}</td>
+      <td>{{ object.sem_cordinator }}</td>
+      <td>{{ object.classroom }}</td>
+      <td>
+        <a href="{{ object.id }}/update" class="btn btn-info btn-xs"> Edit </a>
+        <a href="{{ object.id }}/delete" class="btn btn-danger btn-xs"> Delete </a>
+        </td>
+    </tr>
+    {% empty %} 
+    <h2 class="p-3 m-3 text-center">No Incharge details yet.<a href="{% url 'management:addincharge' %}" class="btn btn-primary"> Create Incharge </a>
+      </h2>
+    {% endfor %} 
+  </tbody>
+</table>
+</div>
+{% endblock content %}

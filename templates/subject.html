@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<title>Subjects</title>
+<div class="container">
+  <table class="table table-striped table-responsive-sm">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Subject Code</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Sem</th>
+        <th scope="col">Credits</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for object in object_list %}
+   
+      <tr>
+        <td>{{ object.subcode }}</td>
+        <td>{{ object.title }}</td>
+        <td>{{ object.sem }}</td>
+        <td>{{ object.credit }}</td>
+        <td>
+      <a href="{{ object.id }}/update" class="btn btn-info btn-xs"> Edit </a>
+      <a href="{{ object.id }}/delete" class="btn btn-danger btn-xs"> Delete </a>
+      </td>
+      </tr>
+  {% empty %} 
+      <li>No Subjects yet.</li>
+      {% endfor %} 
+       </tbody>
+    </table>
+</div>
+{% endblock content %}

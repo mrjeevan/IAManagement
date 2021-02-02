@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<title> Login </title>
+  <div class="container" style="padding: 50px;">
+    <form class="mt-4 mx-auto" style="width:600px" method="post">
+      {% csrf_token %}
+      {{ form|crispy  }}
+      <button  type="submit" class="btn btn-primary mt-4">login</button>
+    </form>
+  </div>
+
+

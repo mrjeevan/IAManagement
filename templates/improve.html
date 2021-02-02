@@ -1,0 +1,31 @@
+  {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+{% if object_list %}
+   <h2 class="p-3 m-3 text-center"> Students needing improvement </h2>
+{% endif %}
+<table class="table table-hover table-responsive-md ">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Student</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Sem & section</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for object in object_list %}
+  <tr>
+      <td>{{ object.id }}</td>
+      <td>{{ object.usn }}</td>
+      <td>{{ object.sub_code }}</td>
+      <td>{{ object.sem }}</td>
+    </tr>
+    {% empty %} 
+    <h2 class="p-3 m-3 text-center"> no student is below average </h2>
+    {% endfor %} 
+  </tbody>
+</table>
+</div>
+{% endblock content %}

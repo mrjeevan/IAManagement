@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+<title>Marks</title>
+<table class="table table-hover table-responsive-md">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Pre/Abs</th>
+      <th scope="col">Student</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Sem & section</th>
+      <th scope="col">Assignment</th>
+      <th scope="col">Total marks</th>
+      <th scope="col">Average</th>
+      <th scope="col">Finial</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for object in object_list %}
+  <tr>
+      <td>
+      {% if object.ispresent %}
+      present
+      {% else %}
+      Absent
+      {% endif %}
+      </td>
+      <td>{{ object.usn }}</td>
+      <td>{{ object.sub_code }}</td>
+      <td>{{ object.sem }}</td>
+      <td>{{ object.assignment }}</td>
+      <td>{{ object.total_marks }}</td>
+      <td>{{ object.average_marks }}</td>
+      <td>{{ object.finial_marks }}</td>
+      <td>
+      <a href="{{ object.id }}/update" class="btn btn-info btn-xs"> Edit </a>
+      <a href="{{ object.id }}/delete" class="btn btn-danger btn-xs"> Delete </a>
+      </td>
+    </tr>
+    {% empty %} 
+    <h2 class="p-3 m-3 text-center">No Mark details yet.
+    <a href="{% url 'management:addmarks' %}" class="btn btn-primary">Add Marks</a>
+  </h2>
+    {% endfor %} 
+  </tbody>
+</table>
+</div>
+{% endblock content %}

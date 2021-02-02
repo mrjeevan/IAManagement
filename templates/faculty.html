@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<title>Faculty</title>
+<div class="container">
+  <table class="table table-hover table-responsive-sm ">
+    <thead class="thead-dark text-center">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Faculty-ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Specilization</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for object in object_list %}
+    <tr class="text-center">
+        <td>{{ object.id }}</td>
+        <td>{{ object.Fid }}</td>
+        <td>{{ object.Name }}</td>
+        <td>{{ object.specialization }}</td>
+        <td>
+        <a href="{{ object.id }}/update" class="btn btn-info btn-xs"> Edit </a>
+        <a href="{{ object.id }}/delete" class="btn btn-danger btn-xs"> Delete </a>
+        </td>
+      </tr>
+      {% empty %} 
+      <h2 class="p-3 m-3 text-center">No Faculty details added yet.
+      <a href="{% url 'management:addfaculty' %}" class="btn btn-primary">Add Faculty</a>
+      </h2>
+      {% endfor %} 
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

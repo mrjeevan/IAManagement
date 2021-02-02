@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+<title>Home</title>
+<div class="text-center">
+  <div class="jumbotron">
+        <!-- stats -->
+        <div class="row m-4 text-center text-justify">
+          <div class="col-12 col-md-3">
+              <div class="card card-cus" style="width: 18rem;">
+                  <img src="{% static 'IA_management/images/study.jpg' %}" class="card-img-top" alt="...">
+                  <div class="card-img-overlay blur-2 white" style="background:rgba(117, 231, 63, 0.212);">
+                    <h5 class="card-title">Outstanding</h5>
+                    <h3>{{ outstanding }}</h3>
+                    <a href="{% url 'management:Outstanding' %}" class="btn btn-primary"> View</a>
+                  </div>
+                </div>
+          </div>
+              </br>
+              <div class="col-12 col-md-3">
+                  <div class="card card-cus" style="width: 18rem;">
+                      <img src="{% static 'IA_management/images/study.jpg' %}" class="card-img-top" alt="...">
+                      <div class="card-img-overlay blur-2 white" style="background:rgba(63, 231, 133, 0.247);" >
+                        <h5 class="card-title">Execelent</h5>
+                        <h3>{{ execelent }}</h3>
+                        <a href="{% url 'management:Execelent' %}" class="btn btn-primary"> View</a>
+                      </div>
+                    </div>
+              </div>
+              <div class="col-12 col-md-3">
+                  <div class="card card-cus" style="width: 18rem;">
+                      <img src="{% static 'IA_management/images/study.jpg' %}" class="card-img-top" alt="...">
+                      <div class="card-img-overlay blur-2 white"  style="background:rgba(231, 164, 63, 0.247);">
+                        <h5 class="card-title">Average</h5>
+                        <h3>{{ average  }}</h3>
+                        <a href="{% url 'management:Average' %}" class="btn btn-primary"> View</a>
+                      </div>
+                    </div>
+              </div>
+              <div class="col-12 col-md-3">
+                  <div class="card card-cus" style="width: 18rem;">
+                     <img src="{% static 'IA_management/images/study.jpg' %}" class="card-img-top" alt="...">
+                      <div class="card-img-overlay blur-2 white" style="background:rgba(231, 63, 63, 0.247);">
+                        <h5 class="card-title">Improvement Needed</h5>
+                        <h3>{{ improve }}</h3> 
+                        <a href="{% url 'management:Improve' %}" class="btn btn-primary"> View</a>
+                      </div>
+                    </div>
+              </div>
+          </div>
+      </div>
+  </div>
+{% else %}
+<title>please login !</title>
+<div class="text-center">
+  <div class="jumbotron">
+        <!-- stats -->
+        <div class="row m-4 text-center text-justify">
+          <div class="col-12 col-md-3">
+              <div class="card card-cus" style="width: 18rem;">
+                  <img src="{% static 'IA_management/images/learn.jpeg' %}" class="card-img-top" alt="...">
+                  <div class="card-img-overlay blur-2 white" style="background:rgba(117, 231, 63, 0.212);">
+                    <h5 class="card-title">Outstanding</h5>
+                    <h3>{{ outstanding }}</h3>
+                    
+                  </div>
+                </div>
+          </div>
+              </br>
+              <div class="col-12 col-md-3">
+                  <div class="card card-cus" style="width: 18rem;">
+                      <img src="{% static 'IA_management/images/learn.jpeg' %}" class="card-img-top" alt="...">
+                      <div class="card-img-overlay blur-2 white" style="background:rgba(63, 231, 133, 0.247);" >
+                        <h5 class="card-title">Execelent</h5>
+                        <h3>{{ execelent }}</h3>
+                      </div>
+                    </div>
+              </div>
+              <div class="col-12 col-md-3">
+                  <div class="card card-cus" style="width: 18rem;">
+                      <img src="{% static 'IA_management/images/learn.jpeg' %}" class="card-img-top" alt="...">
+                      <div class="card-img-overlay blur-2 white"  style="background:rgba(231, 164, 63, 0.247);">
+                        <h5 class="card-title">Average</h5>
+                        <h3>{{ average  }}</h3>
+                        
+                      </div>
+                    </div>
+              </div>
+              <div class="col-12 col-md-3">
+                  <div class="card card-cus" style="width: 18rem;">
+                     <img src="{% static 'IA_management/images/learn.jpeg' %}" class="card-img-top" alt="...">
+                      <div class="card-img-overlay blur-2 white" style="background:rgba(231, 63, 63, 0.247);">
+                        <h5 class="card-title">Improvement Needed</h5>
+                        <h3>{{ improve }}</h3>
+                        
+                      </div>
+                    </div>
+              </div>
+          </div>
+      </div>
+  </div>
+{% endif %}
+{% endblock content %}
+

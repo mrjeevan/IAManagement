@@ -1,0 +1,255 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+    <link rel="icon" href="{% static 'IA_management/images/logo3.png' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href=" {% static 'IA_management/css/nav_side.css' %}">
+     <link rel="stylesheet" href=" {% static 'IA_management/css/main.css' %}">
+</head>
+
+<body>
+<!-- user authunticated -->
+
+<div>
+    
+    <!-- navbar start -->
+    <div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-cust fixed-top">
+            <a href="{% url 'management:home' %}"><img style="height: 55;" src=" {% static 'IA_management/images/logo3.png' %} " alt="IAManagement"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item glow">
+                        
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="nav-link"><i class="fas fa-power-off p-1"> Logout</i></a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="nav-link"><i class="fas fa-power-off p-1"> Login</i></a>
+                        {% endif %}
+                        
+                    </li>
+                </ul>
+
+
+            </div>
+        </nav>
+    </div>
+    <!-- navbar end -->
+    {% if user.is_authenticated %}
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark top" style="margin-top: 70px; position: relative;" href="#">
+            <i class="fas fa-bars top my-auto"></i>
+        </a>
+        
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="#"> IA Management </a>
+                    <div id="close-sidebar">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-pic">
+
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">
+                            <strong> {{user.username}} </strong>
+                        </span>
+                        <span class="user-role"> {{ user.last_login }} </span>
+                    </div>
+                </div>
+                
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span> </span>
+                        </li>
+                        <li>
+                            <a href="{% url 'management:home' %}">
+                                <i class="fa fa-house-user"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="header-menu">
+                            <span>Student</span>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fas fa-user-graduate"></i>
+                                <span> Students </span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'management:students' %}"> All Students</a>
+                                    </li>
+                                    <li>
+                                        <a href=" {% url 'management:addstudent' %} "> Add Students</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fas fa-users"></i>
+                                <span> Classroom </span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'management:semsec' %}"> All classrooms </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'management:addsemsec' %}"> Make Classrooms </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-chart-line"></i>
+                                <span> Marks </span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'management:marks' %}"> Student Marks</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'management:addmarks' %}"> Add Marks</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="header-menu">
+                            <span>Faculty</span>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span> Faculty </span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'management:faculty' %}"> View Faculty</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'management:addfaculty' %}"> Add Faculty</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fas fa-tasks"></i>
+                                <span> Subject </span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'management:subject' %}"> All Subjects </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'management:addsubject' %}"> Add Subject </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        
+
+                        
+                        
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fas fa-user-shield"></i>
+                                <span> Incharge </span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'management:incharge' %}"> All Incharges </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'management:addincharge' %}"> Add Incharge </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
+            </div>
+            <!-- sidebar-content  -->
+
+        </nav>
+        <!-- sidebar-wrapper  -->
+        
+        {% endif %}
+        <main class="page-content">
+            {% if not user.is_authenticated %}
+            <div style="margin-top: 100px;">
+                {% else %}
+            <div>
+                {% endif %}
+                {% block content %}
+                {% endblock content %}
+            </div>
+
+        {% if not user.is_authenticated %}
+        <h3 class="text-center border border-dark m-4 p-4"> please <code><span><a href="{% url 'login' %} ">login</a></span></code> for detailed Information</h3>
+        {% endif %}
+        </main>
+        <!-- page-content" -->
+        
+    </div>
+</div>
+<!-- /user authunticated -->
+
+    <!-- user not authunticated -->
+
+    <!-- user not authunticated -->
+
+    <!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'IA_management/js/side_bar.js' %}"></script>
+
+</body>
+
+</html>

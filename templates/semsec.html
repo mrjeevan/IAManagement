@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<title>Classrooms</title>
+<div class="container">
+    <table class="table table-hover table-responsive-sm">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th scope="col">Semister</th>
+                <th scope="col">Students</th>
+                <th scope="col">Options</th>
+            <tr>
+        </thead>
+        <tbody>
+    {% for object in object_list %}
+    <tr class="text-center">
+      <td>{{ object.sem }}</td>
+      <td>{{ object.usn }}</td>
+      <td>
+      <a href="{{ object.id }}/update" class="btn btn-info btn-xs"> Edit </a>
+      <a href="{{ object.id }}/delete" class="btn btn-danger btn-xs"> Delete </a>
+      </td>
+    </tr>
+{% empty %} 
+    <h3>No Classrooms Created yet.
+    <a href="{% url 'management:addsemsec' %}" class="btn btn-primary"> Create Classroom </a>
+    </h3>
+    {% endfor %} 
+        </tbody>
+</table>
+</div>
+{% endblock content %}
