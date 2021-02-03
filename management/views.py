@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import *
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView,ListView
@@ -7,10 +8,10 @@ from .forms import *
 from django.urls import reverse_lazy
 # Create your views here.
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 
 
 def home(request):
-
     context = {
         'outstanding' : IAmark.objects.filter(average_marks = 30).count(),
         'execelent' : IAmark.objects.filter(average_marks__gte=20, average_marks__lte = 29).count(),
@@ -20,77 +21,79 @@ def home(request):
     return render(request,'home.html',context)
 ############
 
-class AddStudent(CreateView):
+class AddStudent(LoginRequiredMixin,CreateView):
     model = Student
     template_name = "addstudent.html"
     form_class = AddStudentForm
     success_url = reverse_lazy('management:students')
     
-class StudentView(ListView):
+class StudentView(LoginRequiredMixin,ListView):
     model = Student
     template_name = "student.html"
 
-class DeleteStudent(DeleteView):
+
+class DeleteStudent(LoginRequiredMixin,DeleteView):
+    
     model = Student
     success_url =reverse_lazy('management:students')
     template_name = "delete.html"
 
-class UpdateStudent(UpdateView):
+class UpdateStudent(LoginRequiredMixin,UpdateView):
     model = Student
     fields = '__all__'
     success_url =reverse_lazy('management:students')
     template_name = "update.html"
 #####################
-class AddSemsec(CreateView):
+class AddSemsec(LoginRequiredMixin,CreateView):
     model = SemSec
     template_name = "addsemsec.html"
     form_class = AddSemsecForm
     success_url = reverse_lazy('management:semsec')
 
-class SemsecView(ListView):
+class SemsecView(LoginRequiredMixin,ListView):
     model = SemSec
     template_name = "semsec.html"
 
-class DeleteSemsec(DeleteView):
+class DeleteSemsec(LoginRequiredMixin,DeleteView):
     model = SemSec
     success_url = reverse_lazy('management:semsec')
     template_name = "delete.html"
 
-class UpdateSemsec(UpdateView):
+class UpdateSemsec(LoginRequiredMixin,UpdateView):
     model = SemSec
     fields = '__all__'
     success_url = reverse_lazy('management:semsec')
     template_name = "update.html"
 ########################
-class AddSubject(CreateView):
+class AddSubject(LoginRequiredMixin,CreateView):
     model = Subject
     template_name = "addsubject.html"
     form_class = AddSubjectForm
     success_url = reverse_lazy('management:subject')
 
-class SubjectView(ListView):
+class SubjectView(LoginRequiredMixin,ListView):
     model = Subject
     template_name = "subject.html"
 
 
-class DeleteSubject(DeleteView):
+class DeleteSubject(LoginRequiredMixin,DeleteView):
     model = Subject
     success_url = reverse_lazy('management:subject')
     template_name = "delete.html"
 
-class UpdateSubject(UpdateView):
+class UpdateSubject(LoginRequiredMixin,UpdateView):
     model = Subject
     fields = '__all__'
     success_url = reverse_lazy('management:subject')
     template_name = "update.html"
 #####################
-class Addmarks(CreateView):
+class Addmarks(LoginRequiredMixin,CreateView):
     model = IAmark
     template_name = "addmarks.html"
     form_class = AddmarksForm
     success_url = reverse_lazy('management:marks')
 
-class MarksView(ListView):
+class MarksView(LoginRequiredMixin,ListView):
     model = IAmark
     template_name = "marks.html"
     
@@ -103,54 +106,54 @@ class MarksView(ListView):
         }
         return render(request,self.template_name, context)
 
-class DeleteMarks(DeleteView):
+class DeleteMarks(LoginRequiredMixin,DeleteView):
     model = IAmark
     success_url = reverse_lazy('management:marks')
     template_name = "delete.html"
 
-class UpdateMarks(UpdateView):
+class UpdateMarks(LoginRequiredMixin,UpdateView):
     model = IAmark
     fields = '__all__'
     success_url = reverse_lazy('management:marks')
     template_name = "update.html"
 ##################
-class AddFaculty(CreateView):
+class AddFaculty(LoginRequiredMixin,CreateView):
     model = Faculty
     template_name = "addfaculty.html"
     form_class = AddFacultyForm
     success_url = reverse_lazy('management:faculty')
 
-class FacultyView(ListView):
+class FacultyView(LoginRequiredMixin,ListView):
     model = Faculty
     template_name = "faculty.html"
 
-class DeleteFaculty(DeleteView):
+class DeleteFaculty(LoginRequiredMixin,DeleteView):
     model = Faculty
     success_url =reverse_lazy('management:faculty')
     template_name = "delete.html"
 
-class UpdateFaculty(UpdateView):
+class UpdateFaculty(LoginRequiredMixin,UpdateView):
     model = Faculty
     fields = '__all__'
     success_url =reverse_lazy('management:faculty')
     template_name = "update.html"
 #################
-class AddIncharge(CreateView):
+class AddIncharge(LoginRequiredMixin,CreateView):
     model = Incharge
     template_name = "addincharge.html"
     form_class = AddInchargeForm
     success_url = reverse_lazy('management:incharge')
 
-class InchargeView(ListView):
+class InchargeView(LoginRequiredMixin,ListView):
     model = Incharge
     template_name = "incharge.html"
 
-class DeleteIncharge(DeleteView):
+class DeleteIncharge(LoginRequiredMixin,DeleteView):
     model = Incharge
     success_url = reverse_lazy('management:incharge')
     template_name = "delete.html"
 
-class UpdateIncharge(UpdateView):
+class UpdateIncharge(LoginRequiredMixin,UpdateView):
     model = Incharge
     fields = '__all__'
     success_url =reverse_lazy('management:incharge')
@@ -180,6 +183,8 @@ def Improve(request):
     }
     return render(request,'improve.html',context)
 ################### Extra
+
+@permission_required('management.Upgrade') 
 def Upgrade(request):
     ERROR = 0
     SEM = SemSec.objects.all()
