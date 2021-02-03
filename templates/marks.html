@@ -17,6 +17,8 @@
     {% endfor %} 
   </div>
 </div>
+{% else %}
+<input type="button" value="Go back!" onclick="history.back()" class="btn btn-secondary"> 
 {% endif %}
 <table class="table table-hover table-responsive-md">
   <thead class="thead-dark">
