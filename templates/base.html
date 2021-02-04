@@ -43,9 +43,9 @@
                     <li class="nav-item glow">
                         
                         {% if user.is_authenticated %}
-                        <a href="{% url 'logout' %}" class="nav-link"><i class="fas fa-power-off p-1"> Logout</i></a>
+                        <a href="{% url 'management:logout' %}" class="nav-link"><i class="fas fa-power-off p-1"> Logout</i></a>
                         {% else %}
-                        <a href="{% url 'login' %}" class="nav-link"><i class="fas fa-power-off p-1"> Login</i></a>
+                        <a href="{% url 'management:login' %}" class="nav-link"><i class="fas fa-power-off p-1"> Login</i></a>
                         {% endif %}
                         
                     </li>

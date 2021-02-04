@@ -30,3 +30,14 @@ class AddInchargeForm(forms.ModelForm):
     class Meta():
         model = Incharge
         fields = '__all__'
+
+class LoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Username',
+    }))
+    password = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Password',
+        'type': 'password'
+    }))

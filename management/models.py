@@ -1,10 +1,10 @@
 from django.db import models
-
+from account.models import Account
 # Create your models here.
 
 class Student(models.Model):
 
-    usn = models.CharField(max_length=10,null = False,unique=True)
+    usn = models.ForeignKey(Account, verbose_name= "Usn", on_delete=models.CASCADE)
     name = models.CharField( max_length=15,null =False)
     address = models.CharField(max_length=50,null = False)
     phno = models.CharField(max_length=12,null = False)
@@ -113,7 +113,7 @@ class IAmark(models.Model):
         return f'{self.usn}'
 
 class Faculty(models.Model):
-    Fid = models.CharField(max_length=10,null =False,verbose_name = "Faculty ID")
+    Fid = models.ForeignKey(Account, verbose_name= "Fid", on_delete=models.CASCADE)
     Name = models.CharField( max_length=15,null =False)
     SPEC = (
         ('AI/ML','AI/ML'),

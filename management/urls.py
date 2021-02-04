@@ -42,5 +42,8 @@ urlpatterns = [
     path('Average',views.Average, name='Average'),
     path('Improve',views.Improve, name='Improve'),
 #####################
-    path('Upgrade',views.Upgrade, name='Upgrade'),
+    path('Upgrade',views.Upgrade, name='Upgrade'), 
+####################
+    path('login/', login_page, name='login'),
+    path('logout/', logout_page, name='logout'), 
 ]
